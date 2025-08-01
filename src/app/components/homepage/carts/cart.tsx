@@ -66,7 +66,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between gap-14 md:gap-0 flex-wrap">
+    <div className="flex flex-col md:flex-row justify-between gap-14 md:gap-0 md:flex-wrap">
       {products.map((product, index) => (
         <motion.div
           key={product.id}

@@ -236,15 +236,16 @@ const isTeamInView = useInView(teamRef, {
         name: "Emma Watson",
         role: "Managing Director",
         img: "/assests/section/about2.png",
-        width: 294,
-        height: 391,
+        width: 285,
+        height: 300,
       },
+     
       {
         name: "Will Smith",
         role: "Product Designer",
         img: "/assests/section/about3.png",
-        width: 300,
-        height: 391,
+         width: 500,
+  height: 500,
       },
     ][index];
 

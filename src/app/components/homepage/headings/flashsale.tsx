@@ -57,60 +57,66 @@ const Flashsale = () => {
   });
 
   return (
-    <motion.div
-      ref={sectionRef}
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="md:w-[1170px] mt-16 p-7 md:mx-auto"
-    >
-      {/* Today’s Section */}
-      <div className="flex gap-3.5   items-center ">
-        <div className="bg-myred w-[20px] h-[40px] rounded-md" />
-        <div><h2 className={`${poppin.className} text-myred  text-[16px]`}>Today's</h2></div>
-      </div>
+   <motion.div
+  ref={sectionRef}
+  initial={{ opacity: 0, y: 50 }}
+  animate={inView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  className="md:w-[1170px] mt-16 p-7 md:mx-auto"
+>
+  {/* Today’s Section */}
+  <div className="flex gap-3.5 items-center justify-center md:justify-start">
+    <div className="bg-myred w-[20px] h-[40px] rounded-md" />
+    <h2 className={`${poppin.className} text-myred text-[16px]`}>Today's</h2>
+  </div>
 
-      {/* Flash Sale Header */}
-      <div className="md:flex md:flex-row md:justify-between mt-3  text-center md:text-start md:items-center">
-        <div className="md:flex md:w-[600px] md:justify-between md:items-center">
-          <h2 className={`${inter.className} font-semibold text-[36px]`}>Flash Sales</h2>
+  {/* Flash Sale Header */}
+  <div className="flex flex-col md:flex-row md:justify-between mt-3 items-center text-center md:text-start">
+    {/* Title + Countdown */}
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full md:w-[600px] gap-3 md:gap-0">
+      <h2 className={`${inter.className} font-semibold text-[36px]`}>Flash Sales</h2>
 
-          {/* Countdown Timer */}
-          <div className="flex md:w-[302px] gap-3 ">
-            {["Days", "Hours", "Minutes", "Seconds"].map((label, i) => (
-              <div key={label} className="flex items-center">
-                <div className="flex flex-col items-center">
-                  <h2 className={`${poppin1.className} text-[12px]`}>{label}</h2>
-                  <h2 className={`${poppin.className} text-[32px]`}>
-                    {Object.values(timeLeft)[i]}
-                  </h2>
-                </div>
-                {i < 3 && <div className="flex items-center pt-3"><h2 className="text-[30px]">:</h2></div>}
+      {/* Countdown Timer */}
+      <div className="flex justify-center md:justify-start gap-3">
+        {["Days", "Hours", "Minutes", "Seconds"].map((label, i) => (
+          <div key={label} className="flex items-center">
+            <div className="flex flex-col items-center">
+              <h2 className={`${poppin1.className} text-[12px]`}>{label}</h2>
+              <h2 className={`${poppin.className} text-[32px]`}>
+                {Object.values(timeLeft)[i]}
+              </h2>
+            </div>
+            {i < 3 && (
+              <div className="flex items-center pt-3">
+                <h2 className="text-[30px]">:</h2>
               </div>
-            ))}
+            )}
           </div>
-        </div>
-
-        {/* Arrows */}
-        <div className="flex mt-3 md:m-0 gap-3">
-          <div className="w-[40px] h-[40px] bg-iconcolor rounded-full pt-3 pl-3">
-            <Link href={"#"}>
-              <FaArrowLeft className="w-[16px]" />
-            </Link>
-          </div>
-          <div className="w-[40px] h-[40px] bg-iconcolor rounded-full pt-3 pl-3">
-            <Link href={"#"}>
-              <FaArrowRight className="w-[16px]" />
-            </Link>
-          </div>
-        </div>
+        ))}
       </div>
+    </div>
 
-      {/* Product Cart Section */}
-      <div className="md:mt-7 mt-12">
-        <Cart />
+    {/* Arrows*/}
+    <div className="hidden md:flex gap-3 mt-3 md:mt-0">
+      <div className="w-[40px] h-[40px] bg-iconcolor rounded-full pt-3 pl-3">
+        <Link href={"#"}>
+          <FaArrowLeft className="w-[16px]" />
+        </Link>
       </div>
-    </motion.div>
+      <div className="w-[40px] h-[40px] bg-iconcolor rounded-full pt-3 pl-3">
+        <Link href={"#"}>
+          <FaArrowRight className="w-[16px]" />
+        </Link>
+      </div>
+    </div>
+  </div>
+
+  {/* Product Cart Section */}
+  <div className="md:mt-7 mt-12">
+    <Cart />
+  </div>
+</motion.div>
+
   );
 };
 

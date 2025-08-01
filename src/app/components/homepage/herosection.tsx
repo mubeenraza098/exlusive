@@ -137,13 +137,13 @@ const Herosection = () => {
         </div>
 
         {/* ✅ Animated Vertical Divider */}
-        <motion.div
-          ref={dividerRef}
-          initial={{ height: 0, opacity: 0 }}
-          animate={dividerInView ? { height: "405px", opacity: 1 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="bg-black/10 w-[1.5px] md:-mt-[61px] "
-        />
+      <motion.div
+  ref={dividerRef}
+  initial={{ height: 0, opacity: 0 }}
+  animate={dividerInView ? { height: "405px", opacity: 1 } : {}}
+  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+  className="bg-black/10 w-[1.5px] md:-mt-[61px] hidden md:block"
+/>
       </div>
 
       {/* RIGHT: Banner */}
@@ -152,10 +152,10 @@ const Herosection = () => {
         initial={{ opacity: 0, x: 60 }}
         animate={bannerInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="md:w-[892px] md:h-[344px] md:ml-5 bg-black flex md:flex-row flex-col-reverse justify-between items-center"
+        className="md:w-[892px] md:h-[344px] md:ml-5 bg-black flex md:flex-row flex-col-reverse justify-between items-center md:mx-0 mx-4"
       >
         {/* Banner Text Content */}
-        <div className="text-white flex flex-col items-start md:p-8">
+        <div className="text-white flex flex-col items-start md:p-8 ">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={bannerInView ? { opacity: 1, y: 0 } : {}}

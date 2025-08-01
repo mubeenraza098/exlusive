@@ -43,7 +43,7 @@ const CartPage = () => {
   const isInView = useInView(headingRef, { once: true });
 
   return (
-    <div className="w-[1170px] mx-auto p-7">
+    <div className="md:w-[1170px] mx-auto p-7">
       {/* Header Row */}
       <motion.div className="grid grid-cols-4 text-center font-semibold p-4 bg-gray-100 shadow-md rounded-t-md">
         <motion.h2
@@ -88,14 +88,14 @@ const CartPage = () => {
       {cart.map((item, index) => (
         <motion.div
           key={index}
-          className="grid grid-cols-4 items-center text-center border-b py-4 px-2 gap-4"
+          className="md:grid md:grid-cols-4 flex flex-row items-center gap-4 border-b py-6 px-3 text-center "
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
         >
           {/* Product */}
-          <div className="flex items-center gap-3 justify-start ml-3">
+          <div className="flex md:flex-row flex-col items-center gap-3 justify-start ml-3">
             <Image src={item.image} width={50} height={39} alt={item.name} />
             <span className="text-[16px]">{item.name}</span>
           </div>
@@ -121,7 +121,7 @@ const CartPage = () => {
           </div>
 
           {/* Subtotal with Cross Button */}
-          <div className="flex items-center justify-between text-[16px] md:ml-[99px] font-medium">
+          <div className="flex items-center justify-between   text-[16px] md:ml-[99px] font-medium">
             <div>
               <span>${item.price * item.quantity}</span>
             </div>
@@ -129,7 +129,7 @@ const CartPage = () => {
               onClick={() => removeFromCart(item.id)}
               className="text-red-500"
             >
-              <IoCloseCircle className="text-[20px]" />
+              <IoCloseCircle className="text-[20px] mb-20 md:mb-0" />
             </button>
           </div>
         </motion.div>
@@ -146,7 +146,7 @@ const CartPage = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           {/* Coupon Input + Apply Button */}
-          <div className="flex items-center gap-4">
+          <div className="flex md:flex-row flex-col items-center gap-4">
             <input
               type="text"
               placeholder="Coupon Code"
@@ -171,8 +171,9 @@ const CartPage = () => {
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
             whileHover={{ scale: 1.05 }}
+            className="md:m-0 mx-auto"
           >
-            <button className="border px-6 py-2 rounded-md mt-4 transition duration-300 hover:bg-black hover:text-white">
+            <button className="border px-6 py-2  rounded-md mt-4 transition duration-300 hover:bg-black hover:text-white">
               <Link href={"/"}>Return To Shop</Link>
             </button>
           </motion.div>
