@@ -16,15 +16,27 @@ const poppin1 = Poppins({ subsets: ['latin'], weight: '400' });
 
 const Productcart = () => {
   const { addToCart, addToWishlist } = useCart();
-   const { showToast } = useToast(); // <-- toast hook call
+  const { showToast } = useToast(); // <-- toast hook call
 
-  const handleAdd = (product: any) => {
-    addToCart({ ...product, quantity: 1 });
-    showToast(`${product.name} added to cart!`, "succes"); 
+  interface Product {
+    id: string;
+    name: string;
+    price: number;
+    oldPrice: number;
+    image: string;
+    width: number;
+    height: number;
+  }
+
+  const handleAdd = (product: Product) => {
+    const cartItem = { ...product, quantity: 1 };
+    addToCart(cartItem);
+    showToast(`${product.name} added to cart!`, "success"); 
   };
 
-  const handleWishlistClick = (product: any) => {
-    addToWishlist(product);
+  const handleWishlistClick = (product: Product) => {
+    const cartItem = { ...product, quantity: 1 };
+    addToWishlist(cartItem);
     showToast(`${product.name} added to wishlist`, "info");
   };
 
@@ -103,8 +115,8 @@ const Productcart = () => {
     },
   ];
 
-  const renderProductCard = (product: any, index: number) => {
-    const ref = useRef(null);
+  const ProductCard = ({ product, index }: { product: Product; index: number }) => {
+    const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: '-80px' });
 
     // Slower animation for left-side items
@@ -143,15 +155,7 @@ const Productcart = () => {
               </div>
             </div>
             <div
-              onClick={() =>
-                handleAdd({
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,
-                  oldPrice: product.oldPrice,
-                  image: product.image,
-                })
-              }
+              onClick={() => handleAdd(product)}
               className="absolute bottom-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
             >
               <div className="w-full bg-black text-white py-2 flex gap-1 justify-center rounded-b-md items-center">
@@ -176,11 +180,11 @@ const Productcart = () => {
               </p>
             </div>
             <div className="flex items-center gap-1 md:justify-start justify-center">
-              <FaStar className="text-starcolor w-[20px]" />
-              <FaStar className="text-starcolor w-[20px]" />
-              <FaStar className="text-starcolor w-[20px]" />
-              <FaStar className="text-starcolor w-[20px]" />
-              <FaRegStarHalfStroke className="text-starcolor w-[20px]" />
+              <FaStar key="star-1" className="text-starcolor w-[20px]" />
+              <FaStar key="star-2" className="text-starcolor w-[20px]" />
+              <FaStar key="star-3" className="text-starcolor w-[20px]" />
+              <FaStar key="star-4" className="text-starcolor w-[20px]" />
+              <FaRegStarHalfStroke key="star-half" className="text-starcolor w-[20px]" />
               <p className={`${poppin.className} text-[14px] text-black/50`}>
                 (65)
               </p>
@@ -200,11 +204,15 @@ const Productcart = () => {
   return (
     <div>
       <div className="md:flex md:flex-row justify-between flex flex-col gap-14 md:gap-0">
-        {products.slice(0, 4).map((product, index) => renderProductCard(product, index))}
+        {products.slice(0, 4).map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index} />
+        ))}
       </div>
 
       <div className="md:flex md:flex-row justify-between flex flex-col gap-14 md:gap-0 mt-14">
-        {products.slice(4, 8).map((product, index) => renderProductCard(product, index + 4))}
+        {products.slice(4, 8).map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index + 4} />
+        ))}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useRef } from "react";
 import {
   HiDevicePhoneMobile,
 
@@ -13,21 +14,20 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { FiHeadphones } from "react-icons/fi";
 import { Poppins } from "next/font/google";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 
 const poppin = Poppins({ subsets: ["latin"], weight: "400" });
 
 const CategoriesCart = () => {
-  const refs = Array.from({ length: 6 }, () => useRef(null));
-  const inViews = refs.map((ref) => useInView(ref, { margin: "-100px", once: false }));
+  const refs = useRef(Array.from({ length: 6 }, () => React.createRef<HTMLDivElement>()));
+  const inViews = refs.current.map((ref) => useInView(ref, { margin: "-100px", once: false }));
 
   const icons = [
-    <HiDevicePhoneMobile className="md:text-[56px] text-[70px] font-extrabold" />,
-    <HiOutlineDesktopComputer className="md:text-[56px] text-[70px]" />,
-    <TbDeviceWatchStats className="md:text-[56px] text-[70px]" />,
-    <AiOutlineCamera className="md:text-[56px] text-[70px]" />,
-    <FiHeadphones className="md:text-[56px] text-[70px]" />,
-    <TbDeviceGamepad className="md:text-[56px] text-[70px]" />,
+    <HiDevicePhoneMobile key="phone" className="md:text-[56px] text-[70px] font-extrabold" />,
+    <HiOutlineDesktopComputer key="computer" className="md:text-[56px] text-[70px]" />,
+    <TbDeviceWatchStats key="watch" className="md:text-[56px] text-[70px]" />,
+    <AiOutlineCamera key="camera" className="md:text-[56px] text-[70px]" />,
+    <FiHeadphones key="headphones" className="md:text-[56px] text-[70px]" />,
+    <TbDeviceGamepad key="gaming" className="md:text-[56px] text-[70px]" />,
   ];
 
   const labels = ["Phones", "Computers", "SmartWatch", "Camera", "HeadPhones", "Gaming"];
@@ -37,8 +37,8 @@ const CategoriesCart = () => {
       <div className="md:w-[1170px] flex md:flex-row md:justify-between flex-col md:gap-0 gap-10 md:mx-auto p-7">
         {icons.map((icon, i) => (
           <motion.div
-            key={i}
-            ref={refs[i]}
+            key={`category-${i}`}
+            ref={refs.current[i]}
             initial={{ opacity: 0, y: 40 }}
             animate={inViews[i] ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: i * 0.1 }}

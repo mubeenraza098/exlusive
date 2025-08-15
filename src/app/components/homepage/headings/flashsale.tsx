@@ -67,7 +67,7 @@ const Flashsale = () => {
   {/* Today’s Section */}
   <div className="flex gap-3.5 items-center justify-center md:justify-start">
     <div className="bg-myred w-[20px] h-[40px] rounded-md" />
-    <h2 className={`${poppin.className} text-myred text-[16px]`}>Today's</h2>
+    <h2 className={`${poppin.className} text-myred text-[16px]`}>Today&apos;s</h2>
   </div>
 
   {/* Flash Sale Header */}

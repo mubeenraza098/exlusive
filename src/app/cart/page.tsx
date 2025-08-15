@@ -1,18 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useCart } from "@/app/context/CartContext"; // Import CartContext
 import { IoCloseCircle } from "react-icons/io5"; // Cross Icon for removal
-import { FaStar } from "react-icons/fa";
 import { Poppins } from "next/font/google";
-import { CiHeart } from "react-icons/ci";
-import { IoEyeOutline } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const poppin = Poppins({ subsets: ["latin"], weight: "500" });
-const poppin1 = Poppins({ subsets: ["latin"], weight: "400" });
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity } = useCart(); // Get cart, removeFromCart, and updateQuantity function
@@ -39,7 +35,7 @@ const CartPage = () => {
   const shippingFee = 10;
   const totalAmount = subtotal + shippingFee;
 
-  const headingRef = useRef(null);
+  const headingRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(headingRef, { once: true });
 
   return (

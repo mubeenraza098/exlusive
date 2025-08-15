@@ -210,7 +210,7 @@ const isInView = useInView(headerRef, { once: false });
       </motion.div>
     ))
   ) : (
-    <p>No items available for "Just For You".</p>
+    <p>No items available for &quot;Just For You&quot;.</p>
   )}
 </div>
 

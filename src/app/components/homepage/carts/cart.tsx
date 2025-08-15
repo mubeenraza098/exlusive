@@ -52,16 +52,27 @@ const Cart = () => {
     },
   ];
 
-  const productRefs = products.map(() => useRef(null));
-  const inViews = productRefs.map((ref) => useInView(ref, { once: false }));
+  const productRefs = useRef(products.map(() => React.createRef<HTMLDivElement>()));
+  const inViews = productRefs.current.map((ref) => useInView(ref, { once: false }));
 
-  const handleAdd = (product: any) => {
-    addToCart({ ...product, quantity: 1 });
-    showToast(`${product.name} added to cart!`, "succes"); // <-- animated popup message
+  interface Product {
+    id: string;
+    name: string;
+    price: number;
+    oldPrice: number;
+    rating: number;
+    image: string;
+  }
+
+  const handleAdd = (product: Product) => {
+    const cartItem = { ...product, quantity: 1 };
+    addToCart(cartItem);
+    showToast(`${product.name} added to cart!`, "success"); // <-- animated popup message
   };
 
-  const handleWishlistClick = (product: any) => {
-    addToWishlist(product);
+  const handleWishlistClick = (product: Product) => {
+    const cartItem = { ...product, quantity: 1 };
+    addToWishlist(cartItem);
     showToast(`${product.name} added to wishlist`, "info");
   };
 
@@ -70,7 +81,7 @@ const Cart = () => {
       {products.map((product, index) => (
         <motion.div
           key={product.id}
-          ref={productRefs[index]}
+          ref={productRefs.current[index]}
           initial={{ opacity: 0, y: 40 }}
           animate={inViews[index] ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: index * 0.01 }}
@@ -115,7 +126,7 @@ const Cart = () => {
 
             <div className="flex items-center gap-1 justify-center md:justify-start">
               {[...Array(Math.floor(product.rating))].map((_, i) => (
-                <FaStar key={i} className="text-starcolor w-[20px]" />
+                <FaStar key={`star-${product.id}-${i}`} className="text-starcolor w-[20px]" />
               ))}
               {product.rating % 1 !== 0 && (
                 <FaRegStarHalfStroke className="text-starcolor w-[20px]" />
@@ -139,4 +150,3 @@ const Cart = () => {
 };
 
 export default Cart;
-  

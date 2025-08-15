@@ -1,7 +1,11 @@
 'use client';
 import { createContext, useState, useContext } from 'react';
 
-const ToastContext = createContext<any>(null);
+interface ToastContextType {
+  showToast: (message: string, type?: "success" | "error" | "info") => void;
+}
+
+const ToastContext = createContext<ToastContextType | null>(null);
 
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [message, setMessage] = useState<string | null>(null);
@@ -39,4 +43,10 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useToast = () => useContext(ToastContext);
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  return context;
+};
