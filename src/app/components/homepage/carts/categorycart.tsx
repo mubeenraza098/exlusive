@@ -18,8 +18,8 @@ import { motion, useInView } from "framer-motion";
 const poppin = Poppins({ subsets: ["latin"], weight: "400" });
 
 const CategoriesCart = () => {
-  const refs = useRef(Array.from({ length: 6 }, () => React.createRef<HTMLDivElement>()));
-  const inViews = refs.current.map((ref) => useInView(ref, { margin: "-100px", once: false }));
+  const containerRef = useRef<HTMLDivElement>(null);
+  const containerInView = useInView(containerRef, { margin: "-100px", once: false });
 
   const icons = [
     <HiDevicePhoneMobile key="phone" className="md:text-[56px] text-[70px] font-extrabold" />,
@@ -34,13 +34,12 @@ const CategoriesCart = () => {
 
   return (
     <>
-      <div className="md:w-[1170px] flex md:flex-row md:justify-between flex-col md:gap-0 gap-10 md:mx-auto p-7">
+      <div ref={containerRef} className="md:w-[1170px] flex md:flex-row md:justify-between flex-col md:gap-0 gap-10 md:mx-auto p-7">
         {icons.map((icon, i) => (
           <motion.div
             key={`category-${i}`}
-            ref={refs.current[i]}
             initial={{ opacity: 0, y: 40 }}
-            animate={inViews[i] ? { opacity: 1, y: 0 } : {}}
+            animate={containerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: i * 0.1 }}
             whileHover={{ scale: 1.05 }}
             className={`md:w-[170px] md:h-[145px] h-[190px] cursor-pointer flex items-center flex-col justify-center border-2 ${

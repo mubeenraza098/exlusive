@@ -180,9 +180,9 @@ const Electronic = () => {
     },
   ];
 
-  // Create refs and inViews for all products at component level
-  const productRefs = useRef(products.map(() => React.createRef<HTMLDivElement>()));
-  const inViews = productRefs.current.map((ref) => useInView(ref, { once: false }));
+  // Use container-based animation instead of individual refs
+  const productsContainerRef = useRef<HTMLDivElement>(null);
+  const productsContainerInView = useInView(productsContainerRef, { once: false });
 
   interface Product {
     id: string;
@@ -244,15 +244,14 @@ const Electronic = () => {
         </motion.div>
      
 
-<div className=" mt-14 mx-auto flex flex-col md:flex-row justify-between gap-14 md:gap-0 md:gap-y-16 flex-wrap ">
+<div ref={productsContainerRef} className=" mt-14 mx-auto flex flex-col md:flex-row justify-between gap-14 md:gap-0 md:gap-y-16 flex-wrap ">
       {products.map((product, index) => (
         <motion.div
           key={product.id}
-          ref={productRefs.current[index]}
           initial={{ opacity: 0, y: 40 }}
-          animate={inViews[index] ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: index * 0.01 }}
-           whileHover={{ scale: 1.05 }} 
+          animate={productsContainerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          whileHover={{ scale: 1.05 }}
           className="md:h-[350px] flex flex-col group"
         >
           <div className="md:w-[260px] h-[250px] relative bg-iconcolor rounded-md flex items-center justify-center">

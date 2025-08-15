@@ -52,8 +52,8 @@ const Cart = () => {
     },
   ];
 
-  const productRefs = useRef(products.map(() => React.createRef<HTMLDivElement>()));
-  const inViews = productRefs.current.map((ref) => useInView(ref, { once: false }));
+  const containerRef = useRef<HTMLDivElement>(null);
+  const containerInView = useInView(containerRef, { once: false });
 
   interface Product {
     id: string;
@@ -77,15 +77,14 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between gap-14 md:gap-0 md:flex-wrap">
+    <div ref={containerRef} className="flex flex-col md:flex-row justify-between gap-14 md:gap-0 md:flex-wrap">
       {products.map((product, index) => (
         <motion.div
           key={product.id}
-          ref={productRefs.current[index]}
           initial={{ opacity: 0, y: 40 }}
-          animate={inViews[index] ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: index * 0.01 }}
-           whileHover={{ scale: 1.05 }} 
+          animate={containerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          whileHover={{ scale: 1.05 }} 
           className="group"
         >
           <div className="md:w-[260px] h-[250px] relative bg-iconcolor rounded-md flex items-center justify-center shadow-md">
