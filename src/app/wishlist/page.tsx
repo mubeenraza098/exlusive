@@ -11,8 +11,17 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 
+// Product interface
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  oldPrice: number;
+  image: string;
+}
+
 // Mock products list (to simulate random cart display)
-const allProducts = [
+const allProducts: Product[] = [
   { id: "gamepad1", name: "HAVIT HV-G92 Gamepad", price: 120, oldPrice: 160, image: "/assests/flashsale/gamepad.png" },
   { id: "keyboard1", name: "AK-900 Wired Keyboard", price: 960, oldPrice: 1160, image: "/assests/flashsale/keyboard.png" },
   { id: "monitor1", name: "IPS LCD Gaming Monitor", price: 370, oldPrice: 400, image: "/assests/flashsale/tv.png" },
@@ -23,7 +32,7 @@ const allProducts = [
 
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, addToCart } = useCart();
-  const [randomProducts, setRandomProducts] = useState<any[]>([]);
+  const [randomProducts, setRandomProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     // Randomly select 4 products to show
@@ -190,7 +199,7 @@ const isInView = useInView(headerRef, { once: false });
           {/* Add to Cart Button */}
           <div className="absolute bottom-0 w-full text-center cursor-pointer">
             <div
-              onClick={() => addToCart(product)}
+              onClick={() => addToCart({ ...product, quantity: 1 })}
               className="w-full bg-black text-white py-2 flex gap-1 justify-center rounded-b-md items-center"
             >
               <IoCartOutline className="text-[24px]" />
