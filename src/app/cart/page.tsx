@@ -2,7 +2,6 @@
 import React from "react";
 import { useCart } from "@/app/context/CartContext"; // Import CartContext
 import { IoCloseCircle } from "react-icons/io5"; // Cross Icon for removal
-import { Poppins } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
@@ -34,8 +33,6 @@ const CartPage = () => {
   const shippingFee = 10;
   const totalAmount = subtotal + shippingFee;
 
-  const headingRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(headingRef, { once: true });
 
   return (
     <div className="md:w-[1170px] mx-auto p-7">
