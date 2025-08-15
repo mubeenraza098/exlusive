@@ -2,13 +2,13 @@
 
 import { Poppins, Inter } from "next/font/google";
 import Link from "next/link";
-import Cart from "../carts/cart";
+
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-const poppin1 = Poppins({ subsets: ["latin"], weight: "500" });
+
 const poppin = Poppins({ subsets: ["latin"], weight: "600" });
 
 const Categories = () => {

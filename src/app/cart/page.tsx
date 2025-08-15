@@ -8,7 +8,6 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const poppin = Poppins({ subsets: ["latin"], weight: "500" });
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity } = useCart(); // Get cart, removeFromCart, and updateQuantity function

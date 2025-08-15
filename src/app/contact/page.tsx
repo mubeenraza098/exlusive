@@ -1,6 +1,5 @@
 "use client";
-import Nav from "../components/homepage/nav";
-import Footer from "../components/homepage/footer";
+
 import Link from "next/link";
 import { LuPhone } from "react-icons/lu";
 import { MdMailOutline } from "react-icons/md";

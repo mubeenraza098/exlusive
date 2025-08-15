@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-const poppin1 = Poppins({ subsets: ["latin"], weight: "500" });
+
 const poppin = Poppins({ subsets: ["latin"], weight: "600" });
 
 const Feauter = () => {

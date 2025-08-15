@@ -1,5 +1,5 @@
 "use client";
-import ResNav from "../components/homepage/nav";
+
 import Image from "next/image";
 import { Inter, Poppins } from "next/font/google";
 import Link from "next/link";

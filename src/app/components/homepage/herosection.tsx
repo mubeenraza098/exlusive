@@ -23,17 +23,7 @@ const Herosection = () => {
   const bannerInView = useInView(bannerRef, { once: false });
   const imageInView = useInView(imageRef, { once: false });
 
-  const categories = [
-    "Woman’s Fashion",
-    "Men’s Fashion",
-    "Electronics",
-    "Home & Lifestyle",
-    "Medicine",
-    "Sports & Outdoor",
-    "Baby’s & Toys",
-    "Groceries & Pets",
-    "Health & Beauty",
-  ];
+ 
 
   return (
     <div className="md:w-[1170px] mt-8 md:mx-auto md:p-7 flex md:flex-row flex-col justify-between">
