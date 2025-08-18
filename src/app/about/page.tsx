@@ -61,7 +61,7 @@ const isTeamInView = useInView(teamRef, {
           className="flex justify-center md:justify-start"
         >
           <div className="md:h-[21px] flex items-center gap-3 mt-10">
-            <Link href={"/home"}>
+            <Link href={"/"}>
               <h2 className={`${poppin.className} text-[14px] text-black/40`}>
                 Home
               </h2>
